@@ -13,8 +13,6 @@
             --primary-dark: #006400;
             --secondary: #1a1a1a;
             --bg: #f8f9fa;
-            --error: #dc3545;
-            --success: #28a745;
         }
         
         body {
@@ -25,19 +23,17 @@
             overflow-x: hidden;
         }
         
-        /* HEADER - TO'G'RILANGAN */
         .header {
             background: linear-gradient(135deg, #228B22 0%, #006400 100%);
             color: white;
-            padding: 20px 20px;
+            padding: 15px 20px;
             text-align: center;
         }
         
-        /* LOGOTIP - KICHIKROQ */
         .logo-container {
-            width: 70px;      /* 80 dan 70 ga */
-            height: 70px;
-            margin: 0 auto 15px;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 10px;
         }
         
         .logo {
@@ -48,9 +44,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
             overflow: hidden;
-            border: 3px solid rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.5);
         }
         
         .logo img {
@@ -60,17 +56,15 @@
         }
         
         .header h1 { 
-            font-size: 24px;      /* 28 dan 24 ga */
-            margin-bottom: 5px; 
+            font-size: 22px; 
+            margin-bottom: 3px; 
             font-weight: 700; 
         }
         
         .header p { 
             opacity: 0.9; 
-            font-size: 13px;      /* 14 dan 13 ga */
+            font-size: 12px; 
         }
-        
-        /* ... qolgan CSS o'zgarishsiz ... */
         
         .container { padding: 25px 20px; max-width: 600px; margin: 0 auto; }
         
@@ -100,7 +94,6 @@
             border: 2px solid transparent;
             transition: all 0.3s;
             cursor: pointer;
-            position: relative;
         }
         
         .product:hover, .product:active {
@@ -135,11 +128,7 @@
             box-shadow: 0 4px 15px rgba(34,139,34,0.3);
         }
         
-        .btn-primary:hover { box-shadow: 0 6px 20px rgba(34,139,34,0.4); transform: translateY(-2px); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        
         .btn-secondary { background: var(--secondary); color: white; }
-        .btn-secondary:hover { background: #333; }
         
         .contact {
             background: white;
@@ -157,11 +146,7 @@
             padding: 14px 0;
             border-bottom: 1px solid #f0f0f0;
             cursor: pointer;
-            transition: all 0.3s;
         }
-        
-        .contact-item:hover { background: #f8f9fa; margin: 0 -10px; padding-left: 10px; padding-right: 10px; border-radius: 10px; }
-        .contact-item:last-child { border-bottom: none; }
         
         .contact-icon { font-size: 20px; margin-right: 15px; width: 40px; height: 40px; background: #e8f5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         
@@ -170,397 +155,6 @@
         .contact-value { font-size: 15px; font-weight: 500; color: var(--secondary); }
         
         .footer { text-align: center; padding: 30px 20px; color: #999; font-size: 12px; }
-        
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--secondary);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 14px;
-            opacity: 0;
-            transition: all 0.3s;
-            z-index: 1000;
-            max-width: 90%;
-            text-align: center;
-        }
-        
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.success { background: var(--success); }
-        .toast.error { background: var(--error); }
-        
-        .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-            justify-content: center;
-            align-items: flex-end;
-        }
-        
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 20px 20px 0 0;
-            padding: 25px;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-        
-        .modal.show { display: flex; }
-        .modal.show .modal-content { transform: translateY(0); }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .modal-header h3 { font-size: 20px; color: var(--secondary); }
-        
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #999;
-        }
-        
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; font-weight: 500; color: #555; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 15px;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .form-group textarea { resize: vertical; min-height: 80px; }
-    </style>
+    </style>  <!-- BU YERDA YOPILISHI KERAK -->
 </head>
 <body>
-    <div class="toast" id="toast"></div>
-    
-    <div class="modal" id="orderModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>🛒 Buyurtma berish</h3>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-            </div>
-            <form id="orderForm" onsubmit="submitOrder(event)">
-                <div class="form-group">
-                    <label>Ismingiz</label>
-                    <input type="text" id="userName" required placeholder="Ismingizni kiriting">
-                </div>
-                <div class="form-group">
-                    <label>Telefon raqam</label>
-                    <input type="tel" id="userPhone" required placeholder="+998 90 123 45 67" value="+998">
-                </div>
-                <div class="form-group">
-                    <label>Mahsulot</label>
-                    <select id="productSelect">
-                        <option value="">Tanlang...</option>
-                        <option value="Vertikal jalyuzi">Vertikal jalyuzi</option>
-                        <option value="Gorizontal jalyuzi">Gorizontal jalyuzi</option>
-                        <option value="Plisse">Plisse</option>
-                        <option value="Rulon parda">Rulon parda</option>
-                        <option value="Boshqa">Boshqa</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Qo\'shimcha ma\'lumot</label>
-                    <textarea id="userComment" placeholder="O\'lchamlar, rang, soni..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" id="submitBtn">
-                    <span>Yuborish</span>
-                    <div class="spinner" id="btnSpinner"></div>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- HEADER ICHIDA LOGOTIP - TO'G'RILANGAN -->
-    <div class="header">
-        <div class="logo-container">
-            <div class="logo">
-                <img src="tasvirlar/logo.png" alt="Maroqand Jalyuzi" onerror="this.style.display='none'; this.parentElement.innerHTML='🪟'; this.parentElement.style.fontSize='40px';">
-            </div>
-        </div>
-        <h1>Maroqand Jalyuzi</h1>
-        <p>Sifatli va zamonaviy yechimlar</p>
-    </div>
-    
-    <div class="container">
-        <h2 class="section-title">
-            <span>🛍️</span>
-            <span>Mahsulotlar</span>
-        </h2>
-        
-        <div class="products">
-            <div class="product" onclick="openOrderModal('Vertikal jalyuzi')">
-                <div class="product-icon">🪟</div>
-                <h3>Vertikal</h3>
-                <p>Ofis va uy uchun</p>
-            </div>
-            <div class="product" onclick="openOrderModal('Gorizontal jalyuzi')">
-                <div class="product-icon">🏢</div>
-                <h3>Gorizontal</h3>
-                <p>Klassik dizayn</p>
-            </div>
-            <div class="product" onclick="openOrderModal('Plisse')">
-                <div class="product-icon">✨</div>
-                <h3>Plisse</h3>
-                <p>Zamonaviy uslub</p>
-            </div>
-            <div class="product" onclick="openOrderModal('Rulon parda')">
-                <div class="product-icon">🎨</div>
-                <h3>Rulon</h3>
-                <p>Qulay boshqaruv</p>
-            </div>
-        </div>
-        
-        <button class="btn btn-primary" onclick="openOrderModal()">
-            <span>🛒</span>
-            <span>Buyurtma berish</span>
-        </button>
-        
-        <button class="btn btn-secondary" onclick="contact()">
-            <span>📞</span>
-            <span>Qo'ng'iroq qilish</span>
-        </button>
-        
-        <div class="contact">
-            <h2>📍 Aloqa ma'lumotlari</h2>
-            <div class="contact-item" onclick="copyPhone()">
-                <span class="contact-icon">📱</span>
-                <div class="contact-text">
-                    <div class="contact-label">Telefon</div>
-                    <div class="contact-value" id="phoneNumber">+998 97 660 00 55</div>
-                </div>
-            </div>
-            <div class="contact-item" onclick="showToast('Samarqand shahri, Turkiston ko\'chasi, 30-uy')">
-                <span class="contact-icon">📍</span>
-                <div class="contact-text">
-                    <div class="contact-label">Manzil</div>
-                    <div class="contact-value">Samarqand shahri</div>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">⏰</span>
-                <div class="contact-text">
-                    <div class="contact-label">Ish vaqti</div>
-                    <div class="contact-value">Du-Sha: 9:00 - 18:00</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p>© 2025 Maroqand Jalyuzi</p>
-        <p style="margin-top: 5px; font-size: 11px;">Professional oyna yechimlari</p>
-    </div>
-
-    <script>
-        // Initialize Telegram Web App
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.ready();
-        
-        // Set theme
-        tg.setHeaderColor('#228B22');
-        tg.setBackgroundColor('#f8f9fa');
-        
-        // Configure Main Button
-        tg.MainButton.setText("🛒 Buyurtma berish");
-        tg.MainButton.setParams({
-            color: '#228B22',
-            text_color: '#ffffff',
-            is_active: true,
-            is_visible: true
-        });
-        
-        tg.MainButton.onClick(() => {
-            openOrderModal();
-        });
-        
-        // Get user data from Telegram
-        const user = tg.initDataUnsafe?.user || {};
-        
-        // Pre-fill user name if available
-        if (user.first_name) {
-            document.getElementById('userName').value = user.first_name + (user.last_name ? ' ' + user.last_name : '');
-        }
-        
-        // Toast notification
-        function showToast(message, type = '') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast ' + type;
-            setTimeout(() => toast.classList.add('show'), 10);
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-        
-        // Modal functions
-        function openOrderModal(product = '') {
-            const modal = document.getElementById('orderModal');
-            const select = document.getElementById('productSelect');
-            if (product) select.value = product;
-            modal.classList.add('show');
-            
-            // Haptic feedback
-            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-        }
-        
-        function closeModal() {
-            document.getElementById('orderModal').classList.remove('show');
-        }
-        
-        // Close modal on outside click
-        document.getElementById('orderModal').addEventListener('click', (e) => {
-            if (e.target.id === 'orderModal') closeModal();
-        });
-        
-        // Copy phone number
-        function copyPhone() {
-            const phone = document.getElementById('phoneNumber').textContent.replace(/\s/g, '');
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(phone).then(() => {
-                    showToast('Telefon raqam nusxalandi!', 'success');
-                });
-            } else {
-                showToast('Telefon: ' + phone);
-            }
-            
-            if (tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-        }
-        
-        // Contact function
-        function contact() {
-            const phone = '+998976600055';
-            
-            // Try Telegram phone call
-            try {
-                tg.openLink('tel:' + phone);
-            } catch (e) {
-                copyPhone();
-            }
-            
-            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-        }
-        
-        // Submit order
-        async function submitOrder(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const spinner = document.getElementById('btnSpinner');
-            const name = document.getElementById('userName').value;
-            const phone = document.getElementById('userPhone').value;
-            const product = document.getElementById('productSelect').value || 'Ko\'rsatilmagan';
-            const comment = document.getElementById('userComment').value;
-            
-            // Validation
-            if (!name || !phone) {
-                showToast('Iltimos, barcha maydonlarni to\'ldiring', 'error');
-                return;
-            }
-            
-            // Show loading
-            btn.disabled = true;
-            spinner.style.display = 'block';
-            
-            // Prepare order data
-            const orderData = {
-                user_id: user.id || 'unknown',
-                username: user.username || '',
-                first_name: user.first_name || '',
-                last_name: user.last_name || '',
-                customer_name: name,
-                phone: phone,
-                product: product,
-                comment: comment,
-                timestamp: new Date().toISOString(),
-                source: 'telegram_web_app'
-            };
-            
-            // Method 1: Try sendData
-            try {
-                tg.sendData(JSON.stringify(orderData));
-                showToast('Buyurtma yuborildi!', 'success');
-                setTimeout(() => tg.close(), 1500);
-                return;
-            } catch (err) {
-                console.log('sendData failed:', err);
-            }
-            
-            // Method 2: Server
-            try {
-                const response = await fetch('https://your-server.com/api/orders', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
-                });
-                
-                if (response.ok) {
-                    showToast('✅ Buyurtma qabul qilindi!', 'success');
-                    closeModal();
-                    if (tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-                } else {
-                    throw new Error('Server error');
-                }
-            } catch (error) {
-                console.error('Server error:', error);
-                
-                // Fallback
-                const message = `🛒 Yangi buyurtma:%0A👤 Ism: ${encodeURIComponent(name)}%0A📞 Tel: ${encodeURIComponent(phone)}%0A📦 Mahsulot: ${encodeURIComponent(product)}%0A💬 Izoh: ${encodeURIComponent(comment)}`;
-                tg.openLink(`https://t.me/share/url?url=&text=${message}`);
-                showToast('Buyurtma ma\'lumotlari tayyor!', 'success');
-                closeModal();
-            } finally {
-                btn.disabled = false;
-                spinner.style.display = 'none';
-            }
-        }
-        
-        // Handle viewport changes
-        tg.onEvent('viewportChanged', () => tg.expand());
-        
-        // Prevent zoom on double tap
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) e.preventDefault();
-            lastTouchEnd = now;
-        }, false);
-    </script>
-</body>
-</html>
