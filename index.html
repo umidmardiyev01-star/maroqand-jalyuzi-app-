@@ -1,26 +1,588 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <!-- ... style qismi o'zgarmaydi ... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maroqand Jalyuzi</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        :root {
+            --primary: #228B22;
+            --primary-dark: #006400;
+            --secondary: #1a1a1a;
+            --bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+        
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header h1 { 
+            font-size: 32px; 
+            margin-bottom: 8px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p { 
+            opacity: 0.95; 
+            font-size: 15px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .container { 
+            padding: 25px 20px; 
+            max-width: 600px; 
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .product {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .product:hover, .product:active {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(34,139,34,0.15);
+        }
+        
+        .product:hover::before, .product:active::before {
+            transform: scaleX(1);
+        }
+        
+        .product-icon { 
+            font-size: 42px; 
+            margin-bottom: 12px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .product:hover .product-icon {
+            transform: scale(1.1);
+        }
+        
+        .product h3 { 
+            font-size: 15px; 
+            color: var(--primary); 
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        
+        .product p { 
+            font-size: 12px; 
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background: #e8f5e9;
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 8px 0;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(34,139,34,0.3);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(34,139,34,0.4);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #333;
+        }
+        
+        .btn:active { transform: scale(0.98); }
+        
+        .contact {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .contact h2 { 
+            color: var(--primary); 
+            margin-bottom: 20px; 
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .contact-item:hover {
+            background: #f8f9fa;
+            margin: 0 -15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-radius: 10px;
+        }
+        
+        .contact-item:last-child { border-bottom: none; }
+        
+        .contact-icon { 
+            font-size: 22px; 
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-text {
+            flex: 1;
+        }
+        
+        .contact-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 2px;
+        }
+        
+        .contact-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--secondary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
 </head>
 <body>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Yuklanmoqda...</p>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+
     <div class="header">
-        <!-- LOGO O'ZGARDI -->
-        <img src="logo.png" alt="Maroqand Jalyuzi" style="width: 200px; margin-bottom: 15px;">
+        <div class="logo">🪟</div>
         <h1>Maroqand Jalyuzi</h1>
         <p>Sifatli va zamonaviy yechimlar</p>
     </div>
     
-    <!-- ... o'rta qism o'zgarmaydi ... -->
+    <div class="container">
+        <h2 class="section-title">
+            <span>🛍️</span>
+            <span>Mahsulotlar</span>
+        </h2>
         
-    <button class="btn btn-secondary" onclick="contact()">📞 Qo'ng'iroq qilish</button>
+        <div class="products">
+            <div class="product" onclick="order('Vertikal jalyuzi')">
+                <div class="product-icon">🪟</div>
+                <h3>Vertikal</h3>
+                <p>Ofis va uy uchun</p>
+                <span class="price-tag">Batafsil</span>
+            </div>
+            <div class="product" onclick="order('Gorizontal jalyuzi')">
+                <div class="product-icon">🏢</div>
+                <h3>Gorizontal</h3>
+                <p>Klassik dizayn</p>
+                <span class="price-tag">Batafsil</span>
+            </div>
+            <div class="product" onclick="order('Plisse')">
+                <div class="product-icon">✨</div>
+                <h3>Plisse</h3>
+                <p>Zamonaviy uslub</p>
+                <span class="price-tag">Batafsil</span>
+            </div>
+            <div class="product" onclick="order('Rulon parda')">
+                <div class="product-icon">🎨</div>
+                <h3>Rulon</h3>
+                <p>Qulay boshqaruv</p>
+                <span class="price-tag">Batafsil</span>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" onclick="order()">
+            <span>🛒</span>
+            <span>Buyurtma berish</span>
+        </button>
+        
+        <button class="btn btn-secondary" onclick="contact()">
+            <span>📞</span>
+            <span>Qo'ng'iroq qilish</span>
+        </button>
+        
+        <div class="contact">
+            <h2>
+                <span>📍</span>
+                <span>Aloqa ma'lumotlari</span>
+            </h2>
+            <div class="contact-item" onclick="copyToClipboard('+998901234567', 'Telefon raqam nusxalandi!')">
+                <span class="contact-icon">📱</span>
+                <div class="contact-text">
+                    <div class="contact-label">Telefon</div>
+                    <div class="contact-value">+998 90 123 45 67</div>
+                </div>
+            </div>
+            <div class="contact-item" onclick="showToast('Samarqand shahri, Uzun shoh ko\'chasi')">
+                <span class="contact-icon">📍</span>
+                <div class="contact-text">
+                    <div class="contact-label">Manzil</div>
+                    <div class="contact-value">Samarqand shahri</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">⏰</span>
+                <div class="contact-text">
+                    <div class="contact-label">Ish vaqti</div>
+                    <div class="contact-value">Du-Sha: 9:00 - 18:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 Maroqand Jalyuzi</p>
+        <p style="margin-top: 5px; font-size: 11px;">Professional oyna yechimlari</p>
+    </div>
 
     <script>
-        // ... yuqori qism o'zgarmaydi ...
+        // Telegram Web App initialization
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.ready();
         
-        function contact() {
-            tg.openLink('tel:+998976600055');  // FAQAT BU O'ZGARDI
+        // Theme colors
+        tg.setHeaderColor('#228B22');
+        tg.setBackgroundColor('#f8f9fa');
+        
+        // Main Button configuration
+        tg.MainButton.setText("🛒 Buyurtma berish");
+        tg.MainButton.setParams({
+            color: '#228B22',
+            text_color: '#ffffff',
+            is_active: true,
+            is_visible: true
+        });
+        
+        tg.MainButton.onClick(() => {
+            order();
+        });
+        
+        // Back Button for navigation
+        tg.BackButton.onClick(() => {
+            tg.close();
+        });
+        
+        // Utility functions
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
+        
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        function copyToClipboard(text, successMessage) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(successMessage);
+                });
+            } else {
+                // Fallback for older devices
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                showToast(successMessage);
+            }
+        }
+        
+        // Order function with improved UX
+        function order(product = '') {
+            showLoading();
+            
+            setTimeout(() => {
+                hideLoading();
+                
+                const message = product 
+                    ? `🛒 Yangi buyurtma:\n📦 Mahsulot: ${product}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`
+                    : `🛒 Yangi buyurtma\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+                
+                // Try to send data to bot
+                try {
+                    tg.sendData(JSON.stringify({
+                        action: 'order',
+                        product: product || 'Umumiy',
+                        timestamp: new Date().toISOString()
+                    }));
+                } catch (e) {
+                    console.log('SendData error:', e);
+                }
+                
+                // Show success message
+                tg.showPopup({
+                    title: '✅ Buyurtma qabul qilindi!',
+                    message: product 
+                        ? `${product} buyurtmasi uchun rahmat! Tez orada siz bilan bog'lanamiz.`
+                        : 'Buyurtmangiz uchun rahmat! Tez orada siz bilan bog\'lanamiz.',
+                    buttons: [
+                        {id: 'ok', type: 'ok', text: 'OK'},
+                        {id: 'contact', type: 'default', text: 'Qo\'ng\'iroq qilish'}
+                    ]
+                }, (btnId) => {
+                    if (btnId === 'contact') {
+                        contact();
+                    }
+                });
+                
+                // Haptic feedback
+                if (tg.HapticFeedback) {
+                    tg.HapticFeedback.notificationOccurred('success');
+                }
+            }, 500);
+        }
+        
+        // Contact function
+        function contact() {
+            const phone = '+998976600055';
+            
+            // Try to open phone app
+            try {
+                tg.openLink(`tel:${phone}`);
+            } catch (e) {
+                // Fallback: copy to clipboard
+                copyToClipboard(phone, 'Telefon raqam nusxalandi!');
+            }
+            
+            // Impact feedback
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('light');
+            }
+        }
+        
+        // Handle viewport changes
+        tg.onEvent('viewportChanged', () => {
+            tg.expand();
+        });
+        
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
