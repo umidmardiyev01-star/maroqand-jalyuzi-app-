@@ -4,182 +4,344 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maroqand Jalyuzi</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
             color: #333;
+            line-height: 1.6;
         }
+
+        /* Header */
         .header {
-            background: linear-gradient(135deg, #228B22 0%, #006400 100%);
+            background-color: #1a3a2f;
             color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        .logo {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 15px;
+            padding: 15px 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 40px;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .header h1 { font-size: 28px; margin-bottom: 5px; }
-        .header p { opacity: 0.9; font-size: 14px; }
-        
-        .container { padding: 20px; max-width: 500px; margin: 0 auto; }
-        
-        .products {
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-icon {
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .header-icon:hover {
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        /* Design Options */
+        .design-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin: 20px 0;
+            margin-bottom: 25px;
         }
-        .product {
+
+        .design-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 16px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border: 2px solid transparent;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
-        .product:hover { border-color: #228B22; transform: translateY(-2px); }
-        .product-icon { font-size: 40px; margin-bottom: 10px; }
-        .product h3 { font-size: 14px; color: #228B22; margin-bottom: 5px; }
-        .product p { font-size: 12px; color: #666; }
-        
+
+        .design-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .design-card.active {
+            border-color: #2e7d32;
+            background-color: #f8fff8;
+        }
+
+        .design-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .design-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+
+        .design-subtitle {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
         .btn {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            margin: 10px 0;
-            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
+
         .btn-primary {
-            background: linear-gradient(135deg, #228B22 0%, #006400 100%);
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
             color: white;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
         }
-        .btn-secondary {
-            background: #000;
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(46, 125, 50, 0.4);
+        }
+
+        .btn-dark {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
             color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        .btn:active { transform: scale(0.98); }
-        
-        .contact {
+
+        .btn-dark:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Contact Section */
+        .contact-section {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
-        .contact h2 { color: #228B22; margin-bottom: 15px; font-size: 18px; }
+
+        .contact-title {
+            color: #2e7d32;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
         .contact-item {
             display: flex;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
         }
-        .contact-item:last-child { border-bottom: none; }
-        .contact-icon { font-size: 20px; margin-right: 10px; }
-        
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-text {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .contact-item a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 20px;
             color: #999;
-            font-size: 12px;
+            font-size: 13px;
+            padding: 20px;
+            margin-bottom: 60px;
         }
+
+        /* Bottom Fixed Button */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 20px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+            z-index: 99;
+        }
+
+        .bottom-btn {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .design-card, .contact-section, .action-buttons {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .design-card:nth-child(1) { animation-delay: 0.1s; }
+        .design-card:nth-child(2) { animation-delay: 0.2s; }
+        .action-buttons { animation-delay: 0.3s; }
+        .contact-section { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">🪟</div>
-        <h1>Maroqand Jalyuzi</h1>
-        <p>Sifatli va zamonaviy yechimlar</p>
-    </div>
-    
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <span class="close-btn">×</span>
+            <h1 class="header-title">Maroqand Jalyuzi</h1>
+        </div>
+        <div class="header-right">
+            <span class="header-icon">⌄</span>
+            <span class="header-icon">⋮</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
     <div class="container">
-        <h2 style="margin-bottom: 10px;">Mahsulotlar</h2>
         
-        <div class="products">
-            <div class="product" onclick="order('Vertikal jalyuzi')">
-                <div class="product-icon">🪟</div>
-                <h3>Vertikal</h3>
-                <p>Ofis va uy uchun</p>
+        <!-- Design Options -->
+        <div class="design-grid">
+            <div class="design-card active">
+                <span class="design-icon">✨</span>
+                <div class="design-title">Plisse</div>
+                <div class="design-subtitle">Zamonaviy uslub</div>
             </div>
-            <div class="product" onclick="order('Gorizontal jalyuzi')">
-                <div class="product-icon">🏢</div>
-                <h3>Gorizontal</h3>
-                <p>Klassik dizayn</p>
-            </div>
-            <div class="product" onclick="order('Plisse')">
-                <div class="product-icon">✨</div>
-                <h3>Plisse</h3>
-                <p>Zamonaviy uslub</p>
-            </div>
-            <div class="product" onclick="order('Rulon parda')">
-                <div class="product-icon">🎨</div>
-                <h3>Rulon</h3>
-                <p>Qulay boshqaruv</p>
+            <div class="design-card">
+                <span class="design-icon">🎨</span>
+                <div class="design-title">Rulon</div>
+                <div class="design-subtitle">Qulay boshqaruv</div>
             </div>
         </div>
-        
-        <button class="btn btn-primary" onclick="order()">🛒 Buyurtma berish</button>
-        <button class="btn btn-secondary" onclick="contact()">📞 Qo'ng'iroq qilish</button>
-        
-        <div class="contact">
-            <h2>Aloqa</h2>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="https://t.me/your_bot" class="btn btn-primary">
+                <span>🛒</span>
+                <span>Buyurtma berish</span>
+            </a>
+            <a href="tel:+998976600055" class="btn btn-dark">
+                <span>📞</span>
+                <span>Qo'ng'iroq qilish</span>
+            </a>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2 class="contact-title">Aloqa</h2>
+            
             <div class="contact-item">
-                <span class="contact-icon">📱</span>
-                <span>+998 90 123 45 67</span>
+                <a href="tel:+998976600055">
+                    <span class="contact-icon">📱</span>
+                    <span class="contact-text">+998 97 660 00 55</span>
+                </a>
             </div>
+            
             <div class="contact-item">
                 <span class="contact-icon">📍</span>
-                <span>Samarqand shahri</span>
+                <span class="contact-text">Samarqand shahri</span>
             </div>
+            
             <div class="contact-item">
                 <span class="contact-icon">⏰</span>
-                <span>Du-Sha: 9:00 - 18:00</span>
+                <span class="contact-text">Du-Sha: 9:00 - 18:00</span>
             </div>
         </div>
-    </div>
-    
-    <div class="footer">
-        © 2025 Maroqand Jalyuzi. Barcha huquqlar himoyalangan.
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2025 Maroqand Jalyuzi. Barcha huquqlar himoyalangan.
+        </div>
+
     </div>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.ready();
-        
-        tg.MainButton.text = "Buyurtma berish";
-        tg.MainButton.color = "#228B22";
-        tg.MainButton.textColor = "#ffffff";
-        tg.MainButton.show();
-        
-        tg.MainButton.onClick(() => {
-            order();
-        });
-        
-        function order(product = '') {
-            let text = product ? `Men ${product} buyurtma qilmoqchiman` : 'Yangi buyurtma';
-            tg.sendData(text);
-            tg.showAlert('Buyurtma qabul qilindi! Tez orada siz bilan bog\'lanamiz.');
-        }
-        
-        function contact() {
-            tg.openLink('tel:+998901234567');
-        }
-    </script>
+    <!-- Bottom Fixed Button -->
+    <div class="bottom-bar">
+        <a href="https://t.me/your_bot" class="btn btn-primary bottom-btn">
+            Buyurtma berish
+        </a>
+    </div>
+
 </body>
 </html>
