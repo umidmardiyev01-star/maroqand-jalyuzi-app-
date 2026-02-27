@@ -9,50 +9,141 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+            background: #f5f5f5;
             color: #333;
         }
         .header {
             background: linear-gradient(135deg, #228B22 0%, #006400 100%);
             color: white;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
         }
         .logo {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: white;
             border-radius: 50%;
-            margin: 0 auto 10px;
+            margin: 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 28px;
         }
-        .header h1 { font-size: 24px; margin-bottom: 5px; }
-        .header p { opacity: 0.9; font-size: 14px; }
+        .header h1 { font-size: 20px; }
+        .header p { opacity: 0.9; font-size: 12px; }
         
-        .container { padding: 20px; max-width: 500px; margin: 0 auto; }
+        .container { padding: 15px; max-width: 500px; margin: 0 auto; }
         
-        .products {
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0 10px;
+            color: #228B22;
+        }
+        
+        .category-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 12px;
         }
-        .product {
+        
+        .category-card {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 20px 15px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             border: 2px solid transparent;
+            cursor: pointer;
             transition: all 0.3s;
         }
-        .product:hover { border-color: #228B22; transform: translateY(-2px); }
-        .product-icon { font-size: 40px; margin-bottom: 10px; }
-        .product h3 { font-size: 14px; color: #228B22; margin-bottom: 5px; }
-        .product p { font-size: 12px; color: #666; }
+        .category-card:hover, .category-card:active {
+            border-color: #228B22;
+            transform: translateY(-2px);
+        }
+        .category-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        .category-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #228B22;
+        }
+        .category-desc {
+            font-size: 11px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .subcategory-list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .subcategory-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .subcategory-item:last-child { border-bottom: none; }
+        .subcategory-item:hover { background: #f0f8f0; }
+        .subcategory-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .subcategory-info { flex: 1; }
+        .subcategory-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+        .subcategory-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .subcategory-arrow {
+            color: #228B22;
+            font-size: 18px;
+        }
+        
+        .price-tag {
+            background: #228B22;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
         
         .btn {
             width: 100%;
@@ -73,90 +164,109 @@
             background: #000;
             color: white;
         }
-        .btn:active { transform: scale(0.98); }
         
         .contact {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 20px;
             margin-top: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .contact h2 { color: #228B22; margin-bottom: 15px; font-size: 18px; }
+        .contact h2 { color: #228B22; margin-bottom: 15px; font-size: 16px; }
         .contact-item {
             display: flex;
             align-items: center;
             padding: 10px 0;
             border-bottom: 1px solid #eee;
+            font-size: 14px;
         }
         .contact-item:last-child { border-bottom: none; }
-        .contact-icon { font-size: 20px; margin-right: 10px; }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #999;
-            font-size: 12px;
-        }
+        .contact-icon { font-size: 18px; margin-right: 10px; }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
     <div class="header">
-    <div class="logo" style="width: 70px; height: 70px; background: white; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="tasvirlar/logo.png" alt="Maroqand Jalyuzi" style="width: 100%; height: 100%; object-fit: contain;">
+        <button class="back-btn" id="backBtn" onclick="goBack()" style="display: none;">←</button>
+        <div class="logo">🪟</div>
+        <h1 id="pageTitle">Maroqand Jalyuzi</h1>
+        <p id="pageSubtitle">Sifatli va zamonaviy yechimlar</p>
     </div>
-    <h1>Maroqand Jalyuzi</h1>
-    <p>Sifatli va zamonaviy yechimlar</p>
-</div>
-    
+
     <div class="container">
-        <h2 style="margin-bottom: 10px;">Mahsulotlar</h2>
         
-        <div class="products">
-            <div class="product" onclick="order('Jalyuzi')">
-                <div class="product-icon">🪟</div>
-                <h3>Jalyuzi</h3>
-                <p>Vertikal va gorizontal</p>
+        <!-- ASOSIY SAHIFA -->
+        <div id="homePage" class="page active">
+            <div class="section-title">Kategoriyalar</div>
+            <div class="category-grid">
+                <div class="category-card" onclick="showPage('jalyuzi')">
+                    <div class="category-icon">🪟</div>
+                    <div class="category-name">Jalyuzi</div>
+                    <div class="category-desc">Barcha turlari</div>
+                </div>
+                <div class="category-card" onclick="showPage('pardalar')">
+                    <div class="category-icon">🧵</div>
+                    <div class="category-name">Pardalar</div>
+                    <div class="category-desc">Zamonaviy dizayn</div>
+                </div>
+                <div class="category-card" onclick='showPage("korpachalar")'>
+                    <div class="category-icon">🛏️</div>
+                    <div class="category-name">Ko'rpachalar</div>
+                    <div class="category-desc">Sifatli mato</div>
+                </div>
+                <div class="category-card" onclick="showPage('reklama')">
+                    <div class="category-icon">📢</div>
+                    <div class="category-name">Reklama</div>
+                    <div class="category-desc">Banner va taxtalar</div>
+                </div>
             </div>
-            <div class="product" onclick="order('Pardalar')">
-                <div class="product-icon">🧵</div>
-                <h3>Pardalar</h3>
-                <p>Zamonaviy dizayn</p>
-            </div>
-            <div class="product" onclick='order("Ko'rpachalar")'>
-                <div class="product-icon">🛏️</div>
-                <h3>Ko'rpachalar</h3>
-                <p>Sifatli mato</p>
-            </div>
-            <div class="product" onclick="order('Reklama')">
-                <div class="product-icon">📢</div>
-                <h3>Reklama</h3>
-                <p>Banner va taxtalar</p>
+            
+            <button class="btn btn-primary" onclick="order()" style="margin-top: 20px;">🛒 Buyurtma berish</button>
+            <button class="btn btn-secondary" onclick="contact()">📞 Qo'ng'iroq qilish</button>
+            
+            <div class="contact">
+                <h2>Aloqa</h2>
+                <div class="contact-item"><span class="contact-icon">📱</span>+998 97 660 00 55</div>
+                <div class="contact-item"><span class="contact-icon">📍</span>Samarqand shahri</div>
+                <div class="contact-item"><span class="contact-icon">⏰</span>Du-Sha: 9:00 - 18:00</div>
             </div>
         </div>
-        
-        <button class="btn btn-primary" onclick="order()">🛒 Buyurtma berish</button>
-        <button class="btn btn-secondary" onclick="contact()">📞 Qo'ng'iroq qilish</button>
-        
-        <div class="contact">
-            <h2>Aloqa</h2>
-            <div class="contact-item">
-                <span class="contact-icon">📱</span>
-                <span>+998 97 660 00 55</span>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">📍</span>
-                <span>Samarqand shahri</span>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">⏰</span>
-                <span>Du-Sha: 9:00 - 18:00</span>
+
+        <!-- JALYUZI SAHIFASI -->
+        <div id="jalyuziPage" class="page">
+            <div class="section-title">Jalyuzi turlari</div>
+            <div class="category-grid">
+                <div class="category-card" onclick="showSubcategory('vertikal')">
+                    <div class="category-icon">↕️</div>
+                    <div class="category-name">Vertikal</div>
+                    <div class="category-desc">Ofis va uy uchun</div>
+                </div>
+                <div class="category-card" onclick="showSubcategory('gorizontal')">
+                    <div class="category-icon">↔️</div>
+                    <div class="category-name">Gorizontal</div>
+                    <div class="category-desc">25, 35, 50 mm</div>
+                </div>
+                <div class="category-card" onclick="showSubcategory('plisse')">
+                    <div class="category-icon">✨</div>
+                    <div class="category-name">Plisse</div>
+                    <div class="category-desc">Zamonaviy uslub</div>
+                </div>
+                <div class="category-card" onclick="showSubcategory('rulon')">
+                    <div class="category-icon">🎨</div>
+                    <div class="category-name">Rulon</div>
+                    <div class="category-desc">Qulay boshqaruv</div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="footer">
-        © 2025 Maroqand Jalyuzi. Barcha huquqlar himoyalangan.
+
+        <!-- SUBKATEGORIYALAR -->
+        <div id="subcategoryPage" class="page">
+            <div class="section-title" id="subcategoryTitle">Subkategoriyalar</div>
+            <div class="subcategory-list" id="subcategoryList">
+                <!-- JavaScript bilan to'ldiriladi -->
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -166,19 +276,120 @@
         
         tg.MainButton.text = "Buyurtma berish";
         tg.MainButton.color = "#228B22";
-        tg.MainButton.textColor = "#ffffff";
         tg.MainButton.show();
-        
-        tg.MainButton.onClick(() => {
-            order();
-        });
-        
+        tg.MainButton.onClick(() => order());
+
+        let currentPage = 'home';
+        let pageHistory = [];
+
+        const subcategories = {
+            vertikal: [
+                { icon: '🏢', name: 'Ofis uchun', desc: 'Klassik dizayn', price: '150 000' },
+                { icon: '🏠', name: 'Uy uchun', desc: 'Zamonaviy ranglar', price: '120 000' },
+                { icon: '🌿', name: 'Balkon uchun', desc: 'Yomg\'irga chidamli', price: '180 000' },
+                { icon: '🪟', name: 'Eshikka', desc: 'Maxsus o\'lcham', price: '200 000' }
+            ],
+            gorizontal: [
+                { icon: '📏', name: '25 mm', desc: 'Standart', price: '100 000' },
+                { icon: '📐', name: '35 mm', desc: 'O\'rta', price: '130 000' },
+                { icon: '📏', name: '50 mm', desc: 'Katta', price: '160 000' },
+                { icon: '🎨', name: 'Derevyan', desc: 'Premium', price: '250 000' }
+            ],
+            plisse: [
+                { icon: '⭐', name: 'Standart', desc: 'Oddiy', price: '200 000' },
+                { icon: '🌧️', name: 'Yomg\'irga chidamli', desc: 'Tashqi eshik', price: '280 000' },
+                { icon: '🌙', name: 'Tungi', desc: 'To\'liq qorong\'ulik', price: '220 000' },
+                { icon: '☀️', name: 'Quyosh nurlariga', desc: 'UV himoya', price: '240 000' }
+            ],
+            rulon: [
+                { icon: '⚙️', name: 'Zanjirli', desc: 'Oddiy boshqaruv', price: '110 000' },
+                { icon: '🔋', name: 'Elektr', desc: 'Avtomatik', price: '450 000' },
+                { icon: '📱', name: 'Smart', desc: 'Telefon orqali', price: '550 000' },
+                { icon: '✋', name: 'Qo\'l bilan', desc: 'Ekonom', price: '90 000' }
+            ]
+        };
+
+        function showPage(page) {
+            pageHistory.push(currentPage);
+            currentPage = page;
+            
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page + 'Page').classList.add('active');
+            
+            document.getElementById('backBtn').style.display = 'inline-block';
+            
+            const titles = {
+                jalyuzi: 'Jalyuzi',
+                pardalar: 'Pardalar',
+                korpachalar: 'Ko\'rpachalar',
+                reklama: 'Reklama'
+            };
+            
+            if (titles[page]) {
+                document.getElementById('pageTitle').textContent = titles[page];
+                document.getElementById('pageSubtitle').textContent = 'Kategoriyani tanlang';
+            }
+        }
+
+        function showSubcategory(type) {
+            pageHistory.push(currentPage);
+            currentPage = 'subcategory';
+            
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('subcategoryPage').classList.add('active');
+            
+            const titles = {
+                vertikal: 'Vertikal jalyuzi',
+                gorizontal: 'Gorizontal jalyuzi',
+                plisse: 'Plisse jalyuzi',
+                rulon: 'Rulon jalyuzi'
+            };
+            
+            document.getElementById('pageTitle').textContent = titles[type];
+            document.getElementById('pageSubtitle').textContent = 'Turini tanlang';
+            
+            const list = document.getElementById('subcategoryList');
+            list.innerHTML = '';
+            
+            subcategories[type].forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'subcategory-item';
+                div.onclick = () => order(item.name);
+                div.innerHTML = `
+                    <div class="subcategory-icon">${item.icon}</div>
+                    <div class="subcategory-info">
+                        <div class="subcategory-name">${item.name}</div>
+                        <div class="subcategory-desc">${item.desc}</div>
+                    </div>
+                    <span class="price-tag">${item.price} so'm</span>
+                    <span class="subcategory-arrow">›</span>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function goBack() {
+            if (pageHistory.length > 0) {
+                const prevPage = pageHistory.pop();
+                currentPage = prevPage;
+                
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById(prevPage + 'Page').classList.add('active');
+                
+                if (prevPage === 'home') {
+                    document.getElementById('backBtn').style.display = 'none';
+                    document.getElementById('pageTitle').textContent = 'Maroqand Jalyuzi';
+                    document.getElementById('pageSubtitle').textContent = 'Sifatli va zamonaviy yechimlar';
+                }
+            }
+        }
+
         function order(product = '') {
             let text = product ? `Men ${product} buyurtma qilmoqchiman` : 'Yangi buyurtma';
             tg.sendData(text);
             tg.showAlert('Buyurtma qabul qilindi! Tez orada siz bilan bog\'lanamiz.');
         }
-        
+
         function contact() {
             tg.openLink('tel:+998976600055');
         }
