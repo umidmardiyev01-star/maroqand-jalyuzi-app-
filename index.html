@@ -12,6 +12,8 @@
             background: #f5f5f5;
             color: #333;
         }
+        
+        /* Header */
         .header {
             background: linear-gradient(135deg, #228B22 0%, #006400 100%);
             color: white;
@@ -29,7 +31,7 @@
             background: none;
             border: none;
             color: white;
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
         }
         .logo {
@@ -44,144 +46,181 @@
             font-size: 28px;
         }
         .header h1 { font-size: 20px; }
-        .header p { opacity: 0.9; font-size: 12px; }
         
-        .container { padding: 15px; max-width: 500px; margin: 0 auto; }
+        /* Container */
+        .container { padding: 15px; max-width: 500px; margin: 0 auto; padding-bottom: 80px; }
         
+        /* Pages */
         .page { display: none; }
         .page.active { display: block; }
         
+        /* Home Page */
         .section-title {
             font-size: 18px;
             font-weight: bold;
             margin: 15px 0 10px;
             color: #228B22;
         }
-        
         .category-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-        
         .category-card {
             background: white;
             border-radius: 12px;
-            padding: 20px 15px;
+            padding: 20px;
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             border: 2px solid transparent;
             cursor: pointer;
-            transition: all 0.3s;
         }
-        .category-card:hover, .category-card:active {
-            border-color: #228B22;
-            transform: translateY(-2px);
-        }
-        .category-icon {
-            font-size: 36px;
-            margin-bottom: 8px;
-        }
-        .category-name {
-            font-size: 14px;
-            font-weight: bold;
-            color: #228B22;
-        }
-        .category-desc {
-            font-size: 11px;
-            color: #666;
-            margin-top: 4px;
-        }
+        .category-card:active { border-color: #228B22; }
+        .category-icon { font-size: 36px; margin-bottom: 8px; }
+        .category-name { font-size: 14px; font-weight: bold; color: #228B22; }
         
-        .subcategory-list {
+        /* Order Form */
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .order-header h2 { font-size: 20px; }
+        .draft-btn {
             background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .subcategory-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .subcategory-item:last-child { border-bottom: none; }
-        .subcategory-item:hover { background: #f0f8f0; }
-        .subcategory-icon {
-            font-size: 24px;
-            margin-right: 15px;
-            width: 40px;
-            height: 40px;
-            background: #e8f5e9;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .subcategory-info { flex: 1; }
-        .subcategory-name {
-            font-weight: bold;
-            color: #333;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 14px;
-        }
-        .subcategory-desc {
-            font-size: 12px;
-            color: #666;
-            margin-top: 2px;
-        }
-        .subcategory-arrow {
-            color: #228B22;
-            font-size: 18px;
+            cursor: pointer;
         }
         
-        .price-tag {
-            background: #228B22;
-            color: white;
-            padding: 4px 10px;
+        .product-card {
+            background: white;
             border-radius: 15px;
-            font-size: 12px;
+            border: 2px solid #FFD700;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .product-header {
+            background: #f8f8f8;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .product-header h3 { font-size: 16px; }
+        .arrow { font-size: 20px; color: #666; }
+        
+        .product-body {
+            padding: 15px;
+            display: none;
+        }
+        .product-body.active { display: block; }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            font-size: 14px;
             font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
         }
         
-        .btn {
+        .add-size-btn {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #228B22;
+            background: white;
+            border-radius: 10px;
+            color: #228B22;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+        .nav-item {
+            color: #888;
+            text-decoration: none;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-item.active { color: #FFD700; }
+        .nav-icon { font-size: 24px; }
+        
+        /* Submit Button */
+        .submit-btn {
             width: 100%;
             padding: 15px;
+            background: linear-gradient(135deg, #228B22 0%, #006400 100%);
+            color: white;
             border: none;
             border-radius: 12px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin: 10px 0;
-            transition: all 0.3s;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #228B22 0%, #006400 100%);
-            color: white;
-        }
-        .btn-secondary {
-            background: #000;
-            color: white;
+            margin-top: 20px;
         }
         
-        .contact {
+        /* Category Dropdown */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
         }
-        .contact h2 { color: #228B22; margin-bottom: 15px; font-size: 16px; }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
+        .dropdown-menu.active { display: block; }
+        .dropdown-item {
+            padding: 12px;
             border-bottom: 1px solid #eee;
-            font-size: 14px;
+            cursor: pointer;
         }
-        .contact-item:last-child { border-bottom: none; }
-        .contact-icon { font-size: 18px; margin-right: 10px; }
+        .dropdown-item:hover { background: #f0f8f0; }
+        .dropdown-item:last-child { border-bottom: none; }
     </style>
 </head>
 <body>
@@ -190,7 +229,6 @@
         <button class="back-btn" id="backBtn" onclick="goBack()" style="display: none;">←</button>
         <div class="logo">🪟</div>
         <h1 id="pageTitle">Maroqand Jalyuzi</h1>
-        <p id="pageSubtitle">Sifatli va zamonaviy yechimlar</p>
     </div>
 
     <div class="container">
@@ -199,74 +237,121 @@
         <div id="homePage" class="page active">
             <div class="section-title">Kategoriyalar</div>
             <div class="category-grid">
-                <div class="category-card" onclick="showPage('jalyuzi')">
-                    <div class="category-icon">🪟</div>
-                    <div class="category-name">Jalyuzi</div>
-                    <div class="category-desc">Barcha turlari</div>
+                <div class="category-card" onclick="showOrderForm()">
+                    <div class="category-icon">🛒</div>
+                    <div class="category-name">Buyurtma berish</div>
                 </div>
-                <div class="category-card" onclick="showPage('pardalar')">
-                    <div class="category-icon">🧵</div>
-                    <div class="category-name">Pardalar</div>
-                    <div class="category-desc">Zamonaviy dizayn</div>
+                <div class="category-card" onclick="contact()">
+                    <div class="category-icon">📞</div>
+                    <div class="category-name">Bog'lanish</div>
                 </div>
-                <div class="category-card" onclick='showPage("korpachalar")'>
-                    <div class="category-icon">🛏️</div>
-                    <div class="category-name">Ko'rpachalar</div>
-                    <div class="category-desc">Sifatli mato</div>
+                <div class="category-card" onclick="showPage('products')">
+                    <div class="category-icon">📋</div>
+                    <div class="category-name">Mahsulotlar</div>
                 </div>
-                <div class="category-card" onclick="showPage('reklama')">
-                    <div class="category-icon">📢</div>
-                    <div class="category-name">Reklama</div>
-                    <div class="category-desc">Banner va taxtalar</div>
-                </div>
-            </div>
-            
-            <button class="btn btn-primary" onclick="order()" style="margin-top: 20px;">🛒 Buyurtma berish</button>
-            <button class="btn btn-secondary" onclick="contact()">📞 Qo'ng'iroq qilish</button>
-            
-            <div class="contact">
-                <h2>Aloqa</h2>
-                <div class="contact-item"><span class="contact-icon">📱</span>+998 97 660 00 55</div>
-                <div class="contact-item"><span class="contact-icon">📍</span>Samarqand shahri</div>
-                <div class="contact-item"><span class="contact-icon">⏰</span>Du-Sha: 9:00 - 18:00</div>
-            </div>
-        </div>
-
-        <!-- JALYUZI SAHIFASI -->
-        <div id="jalyuziPage" class="page">
-            <div class="section-title">Jalyuzi turlari</div>
-            <div class="category-grid">
-                <div class="category-card" onclick="showSubcategory('vertikal')">
-                    <div class="category-icon">↕️</div>
-                    <div class="category-name">Vertikal</div>
-                    <div class="category-desc">Ofis va uy uchun</div>
-                </div>
-                <div class="category-card" onclick="showSubcategory('gorizontal')">
-                    <div class="category-icon">↔️</div>
-                    <div class="category-name">Gorizontal</div>
-                    <div class="category-desc">25, 35, 50 mm</div>
-                </div>
-                <div class="category-card" onclick="showSubcategory('plisse')">
-                    <div class="category-icon">✨</div>
-                    <div class="category-name">Plisse</div>
-                    <div class="category-desc">Zamonaviy uslub</div>
-                </div>
-                <div class="category-card" onclick="showSubcategory('rulon')">
-                    <div class="category-icon">🎨</div>
-                    <div class="category-name">Rulon</div>
-                    <div class="category-desc">Qulay boshqaruv</div>
+                <div class="category-card" onclick="showPage('about')">
+                    <div class="category-icon">ℹ️</div>
+                    <div class="category-name">Biz haqimizda</div>
                 </div>
             </div>
         </div>
 
-        <!-- SUBKATEGORIYALAR -->
-        <div id="subcategoryPage" class="page">
-            <div class="section-title" id="subcategoryTitle">Subkategoriyalar</div>
-            <div class="subcategory-list" id="subcategoryList">
-                <!-- JavaScript bilan to'ldiriladi -->
+        <!-- BUYURTMA FORMASI -->
+        <div id="orderPage" class="page">
+            <div class="order-header">
+                <h2>← Buyurtma yaratish</h2>
+                <button class="draft-btn">Qoralamalar</button>
             </div>
+
+            <form id="orderForm">
+                <div class="product-card">
+                    <div class="product-header" onclick="toggleProduct(this)">
+                        <h3>Mahsulot 1</h3>
+                        <span class="arrow">▲</span>
+                    </div>
+                    <div class="product-body active">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Kategoriya</label>
+                                <select id="category" onchange="updateSubcategory()">
+                                    <option value="">Tanlang</option>
+                                    <option value="combo">Kombo</option>
+                                    <option value="bezplanki">Bez planki</option>
+                                    <option value="plisse">Plisse</option>
+                                    <option value="rollo">Rollo</option>
+                                    <option value="rollo-shtori">Rollo Shtori</option>
+                                    <option value="rimskiy">Rimskiy</option>
+                                    <option value="evro">Evro</option>
+                                    <option value="masketniy">Masketniy</option>
+                                    <option value="honeycomb">Honeycomb</option>
+                                    <option value="derevyanniy">Derevyanniy</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Subkategoriya</label>
+                                <select id="subcategory">
+                                    <option value="">Tanlang</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kod</label>
+                            <select>
+                                <option value="">Mahsulot kodini tanlang</option>
+                                <option value="001">001 - Standart</option>
+                                <option value="002">002 - Premium</option>
+                                <option value="003">003 - Ekonom</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>O'lchamlar</label>
+                            <select>
+                                <option value="">O'lcham 1</option>
+                                <option value="100x150">100 x 150 cm</option>
+                                <option value="120x160">120 x 160 cm</option>
+                                <option value="150x200">150 x 200 cm</option>
+                                <option value="custom">Boshqa</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="add-size-btn">+ O'lcham qo'shish</button>
+
+                        <div class="form-group">
+                            <label>Izoh</label>
+                            <textarea placeholder="Izohingizni qoldiring"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Buyurtma berish</button>
+            </form>
         </div>
 
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active" onclick="showPage('home')">
+            <span class="nav-icon">🏠</span>
+            <span>Asosiy</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Savat</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showOrderForm()">
+            <span class="nav-icon" style="background: #FFD700; color: #1a1a1a; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -20px; font-size: 28px;">+</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Buyurtmalar</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>Profil</span>
+        </a>
     </div>
 
     <script>
@@ -276,119 +361,68 @@
         
         tg.MainButton.text = "Buyurtma berish";
         tg.MainButton.color = "#228B22";
-        tg.MainButton.show();
-        tg.MainButton.onClick(() => order());
-
-        let currentPage = 'home';
-        let pageHistory = [];
+        tg.MainButton.hide();
 
         const subcategories = {
-            vertikal: [
-                { icon: '🏢', name: 'Ofis uchun', desc: 'Klassik dizayn', price: '150 000' },
-                { icon: '🏠', name: 'Uy uchun', desc: 'Zamonaviy ranglar', price: '120 000' },
-                { icon: '🌿', name: 'Balkon uchun', desc: 'Yomg\'irga chidamli', price: '180 000' },
-                { icon: '🪟', name: 'Eshikka', desc: 'Maxsus o\'lcham', price: '200 000' }
-            ],
-            gorizontal: [
-                { icon: '📏', name: '25 mm', desc: 'Standart', price: '100 000' },
-                { icon: '📐', name: '35 mm', desc: 'O\'rta', price: '130 000' },
-                { icon: '📏', name: '50 mm', desc: 'Katta', price: '160 000' },
-                { icon: '🎨', name: 'Derevyan', desc: 'Premium', price: '250 000' }
-            ],
-            plisse: [
-                { icon: '⭐', name: 'Standart', desc: 'Oddiy', price: '200 000' },
-                { icon: '🌧️', name: 'Yomg\'irga chidamli', desc: 'Tashqi eshik', price: '280 000' },
-                { icon: '🌙', name: 'Tungi', desc: 'To\'liq qorong\'ulik', price: '220 000' },
-                { icon: '☀️', name: 'Quyosh nurlariga', desc: 'UV himoya', price: '240 000' }
-            ],
-            rulon: [
-                { icon: '⚙️', name: 'Zanjirli', desc: 'Oddiy boshqaruv', price: '110 000' },
-                { icon: '🔋', name: 'Elektr', desc: 'Avtomatik', price: '450 000' },
-                { icon: '📱', name: 'Smart', desc: 'Telefon orqali', price: '550 000' },
-                { icon: '✋', name: 'Qo\'l bilan', desc: 'Ekonom', price: '90 000' }
-            ]
+            'combo': ['Vertikal + Gorizontal', 'Plisse + Rollo', 'Evro + Rimskiy'],
+            'bezplanki': ['Standart', 'Premium', 'Ekonom'],
+            'plisse': ['Oddiy', 'Yomg\'irga chidamli', 'Tungi', 'Quyosh nurlariga'],
+            'rollo': ['Zanjirli', 'Elektr', 'Smart', 'Qo\'l bilan'],
+            'rollo-shtori': ['Derevyan', 'Plastik', 'Metall'],
+            'rimskiy': ['Klassik', 'Zamonaviy', 'Premium'],
+            'evro': ['Standart', 'Keng', 'Tor'],
+            'masketniy': ['To'liq', 'Yarim', 'Maxsus'],
+            'honeycomb': ['Yagona', 'Ikki qatlamli', 'Uch qatlamli'],
+            'derevyanniy': ['Qora', 'Oq', 'Tabiiy', 'Qizil']
         };
 
         function showPage(page) {
-            pageHistory.push(currentPage);
-            currentPage = page;
-            
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(page + 'Page').classList.add('active');
             
-            document.getElementById('backBtn').style.display = 'inline-block';
-            
-            const titles = {
-                jalyuzi: 'Jalyuzi',
-                pardalar: 'Pardalar',
-                korpachalar: 'Ko\'rpachalar',
-                reklama: 'Reklama'
-            };
-            
-            if (titles[page]) {
-                document.getElementById('pageTitle').textContent = titles[page];
-                document.getElementById('pageSubtitle').textContent = 'Kategoriyani tanlang';
+            if (page === 'home') {
+                document.getElementById('backBtn').style.display = 'none';
+                document.getElementById('pageTitle').textContent = 'Maroqand Jalyuzi';
             }
         }
 
-        function showSubcategory(type) {
-            pageHistory.push(currentPage);
-            currentPage = 'subcategory';
-            
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('subcategoryPage').classList.add('active');
-            
-            const titles = {
-                vertikal: 'Vertikal jalyuzi',
-                gorizontal: 'Gorizontal jalyuzi',
-                plisse: 'Plisse jalyuzi',
-                rulon: 'Rulon jalyuzi'
-            };
-            
-            document.getElementById('pageTitle').textContent = titles[type];
-            document.getElementById('pageSubtitle').textContent = 'Turini tanlang';
-            
-            const list = document.getElementById('subcategoryList');
-            list.innerHTML = '';
-            
-            subcategories[type].forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'subcategory-item';
-                div.onclick = () => order(item.name);
-                div.innerHTML = `
-                    <div class="subcategory-icon">${item.icon}</div>
-                    <div class="subcategory-info">
-                        <div class="subcategory-name">${item.name}</div>
-                        <div class="subcategory-desc">${item.desc}</div>
-                    </div>
-                    <span class="price-tag">${item.price} so'm</span>
-                    <span class="subcategory-arrow">›</span>
-                `;
-                list.appendChild(div);
-            });
+        function showOrderForm() {
+            showPage('order');
+            document.getElementById('backBtn').style.display = 'block';
+            document.getElementById('pageTitle').textContent = 'Buyurtma';
         }
 
         function goBack() {
-            if (pageHistory.length > 0) {
-                const prevPage = pageHistory.pop();
-                currentPage = prevPage;
-                
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById(prevPage + 'Page').classList.add('active');
-                
-                if (prevPage === 'home') {
-                    document.getElementById('backBtn').style.display = 'none';
-                    document.getElementById('pageTitle').textContent = 'Maroqand Jalyuzi';
-                    document.getElementById('pageSubtitle').textContent = 'Sifatli va zamonaviy yechimlar';
-                }
+            showPage('home');
+        }
+
+        function toggleProduct(header) {
+            const body = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+            body.classList.toggle('active');
+            arrow.textContent = body.classList.contains('active') ? '▲' : '▼';
+        }
+
+        function updateSubcategory() {
+            const category = document.getElementById('category').value;
+            const subSelect = document.getElementById('subcategory');
+            subSelect.innerHTML = '<option value="">Tanlang</option>';
+            
+            if (subcategories[category]) {
+                subcategories[category].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subSelect.appendChild(option);
+                });
             }
         }
 
-        function order(product = '') {
-            let text = product ? `Men ${product} buyurtma qilmoqchiman` : 'Yangi buyurtma';
-            tg.sendData(text);
-            tg.showAlert('Buyurtma qabul qilindi! Tez orada siz bilan bog\'lanamiz.');
-        }
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            tg.showAlert('Buyurtma qabul qilindi!');
+            tg.sendData('Yangi buyurtma');
+        });
 
         function contact() {
             tg.openLink('tel:+998976600055');
